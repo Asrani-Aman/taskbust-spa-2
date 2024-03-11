@@ -1,0 +1,10 @@
+@import "color_palette";
+@import "reset";
+@import "variables";
+@import "common";
+@import "function";
+@import "header";
+@import "global";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
