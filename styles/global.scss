@@ -8,8 +8,9 @@
   padding-top: $xll-3;
   height: 90vh !important;
   overflow: hidden !important;
+  width: 100vw;
+  left: -5.5vw;
   position: relative;
-
 
   &::before {
     content: "";
