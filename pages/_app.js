@@ -1,15 +1,15 @@
 import AuthProvider from "@/components/common/AuthProvider";
 import Layout from "@/components/common/Layout";
 import "@/styles/main.scss";
-// import { SessionProvider } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <AuthProvider>
+      <SessionProvider session={pageProps.session}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </AuthProvider>
+      </SessionProvider>
     </>
   );
 }
