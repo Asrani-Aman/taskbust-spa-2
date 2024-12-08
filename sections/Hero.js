@@ -9,6 +9,8 @@ import React from "react";
 import Image from "next/image";
 import { twMerge } from "tailwind-merge";
 import { TracingBeam } from "@/components/ui/tracing-beam";
+import ProjectsSection from "@/assets/ProjectSection";
+
 const Hero = () => {
   return (
     <>
@@ -47,6 +49,7 @@ const Hero = () => {
           </div>
         </div>
       </section>
+      <ProjectsSection/>
       <Expertise />
       <Banner />
       <Testimonial />
