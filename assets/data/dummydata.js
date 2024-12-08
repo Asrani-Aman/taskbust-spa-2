@@ -58,7 +58,7 @@ export const expertise = [
   },
   {
     id: 4,
-    title: "Content Writing",
+    title: "WEB 3",
     cover: "../images/e4.jpg",
     desc: [
       { text: "Visual identity" },

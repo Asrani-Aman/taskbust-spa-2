@@ -18,9 +18,10 @@ const Hero = () => {
           <h1 className="hero-title">WE BUILD DIGITAL EXPERIENCES</h1>
 
           <div className="sub-heading">
-            <TitleSm title="WEBSITES" /> <span>.</span>
-            <TitleSm title="BRANDING" /> <span>.</span>
-            <TitleSm title="DIGITAL MARKETING" />
+            <TitleSm title="WEBSITE/APP DEVELOPMENT" /> <span>.</span>
+            <TitleSm title="GRAPHIC DESIGNING" /> <span>.</span>
+            <TitleSm title="VIDEO EDITING" />
+            <TitleSm title="WEB3 " />
           </div>
         </div>
       </section>
@@ -37,7 +38,7 @@ const Hero = () => {
           </div>
           <div className="hero-content grid-4">
             {home.map((item, i) => (
-              <div className="box" key={i}>
+              <div className="box flex flex-col" key={i}>
                 <span className="green">{item.icon}</span> <br />
                 <br />
                 <h3>{item.title}</h3>
