@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://taskbust.com
+
+# Sitemaps
+Sitemap: https://taskbust.com/sitemap.xml
+Sitemap: https://taskbust.com/server-sitemap.xml

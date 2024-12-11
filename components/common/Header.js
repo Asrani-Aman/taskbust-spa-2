@@ -38,7 +38,7 @@ const Header = () => {
             >
               About us
             </Link>
-            <Link
+            {/* <Link
               href="/team"
               className={activeLink == "/team" ? "activeLink" : "none"}
             >
@@ -49,7 +49,7 @@ const Header = () => {
               className={activeLink == "/services" ? "activeLink" : "none"}
             >
               Services
-            </Link>
+            </Link> */}
             {/* <Link
               href="/showcase"
               className={activeLink == "/showcase" ? "activeLink" : "none"}
@@ -68,7 +68,7 @@ const Header = () => {
             >
               Contact
             </Link>
-            <button className="button-primary">Get/Post your Work</button>
+            {/* <button className="button-primary">Get/Post your Work</button> */}
           </nav>
           <button
             onClick={() => {
