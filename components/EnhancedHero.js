@@ -1,21 +1,21 @@
-import React, { useEffect, useRef } from 'react';
-import { motion } from 'framer-motion';
-import { TitleLogo } from './common/Title';
+import React, { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { TitleLogo } from "./common/Title";
 
 const ParticleField = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    
+    const ctx = canvas.getContext("2d");
+
     // Set canvas size
     const setSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
     setSize();
-    window.addEventListener('resize', setSize);
+    window.addEventListener("resize", setSize);
 
     // Particle system
     const particles = [];
@@ -28,14 +28,14 @@ const ParticleField = () => {
         size: Math.random() * 2 + 1,
         speedX: Math.random() * 2 - 1,
         speedY: Math.random() * 2 - 1,
-        opacity: Math.random() * 0.5 + 0.2
+        opacity: Math.random() * 0.5 + 0.2,
       });
     }
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      particles.forEach(particle => {
+
+      particles.forEach((particle) => {
         particle.x += particle.speedX;
         particle.y += particle.speedY;
 
@@ -47,11 +47,15 @@ const ParticleField = () => {
 
         // Create gradient for each particle
         const gradient = ctx.createRadialGradient(
-          particle.x, particle.y, 0,
-          particle.x, particle.y, particle.size * 2
+          particle.x,
+          particle.y,
+          0,
+          particle.x,
+          particle.y,
+          particle.size * 2
         );
         gradient.addColorStop(0, `rgba(80, 200, 120, ${particle.opacity})`);
-        gradient.addColorStop(1, 'rgba(80, 200, 120, 0)');
+        gradient.addColorStop(1, "rgba(80, 200, 120, 0)");
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
@@ -64,14 +68,14 @@ const ParticleField = () => {
 
     animate();
 
-    return () => window.removeEventListener('resize', setSize);
+    return () => window.removeEventListener("resize", setSize);
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
       className="absolute top-0 left-0 w-full h-full pointer-events-none"
-      style={{ mixBlendMode: 'screen' }}
+      style={{ mixBlendMode: "screen" }}
     />
   );
 };
@@ -81,7 +85,7 @@ const CreativeHero = () => {
     "WEBSITE/APP DEVELOPMENT",
     "GRAPHIC DESIGNING",
     "VIDEO EDITING",
-    "WEB3"
+    "WEB3",
   ];
 
   return (
@@ -89,7 +93,7 @@ const CreativeHero = () => {
       {/* Background Effects */}
       <ParticleField />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom,_var(--tw-gradient-stops))] from-emerald-500/10 via-transparent to-transparent" />
-      
+
       {/* Curved Line */}
       <svg
         className="absolute bottom-0 left-0 w-full pointer-events-none"
@@ -125,10 +129,10 @@ const CreativeHero = () => {
             transition={{ duration: 0.8 }}
             className="mb-12"
           >
-            <TitleLogo 
-              title="Bust" 
-              caption="Task" 
-              className="inline-block transform scale-150"
+            <TitleLogo
+              title="Bust"
+              caption="Task"
+              className="inline-block transform scale-150 font-black" // Added font-black for maximum boldness
             />
           </motion.div>
 
@@ -145,7 +149,7 @@ const CreativeHero = () => {
                 <motion.div
                   className="absolute -bottom-2 left-0 w-full h-1 bg-emerald-500"
                   initial={{ width: 0 }}
-                  animate={{ width: '100%' }}
+                  animate={{ width: "100%" }}
                   transition={{ duration: 1, delay: 1 }}
                 />
               </div>
@@ -177,7 +181,7 @@ const CreativeHero = () => {
                   </span>
                   <motion.div
                     className="absolute -bottom-1 left-0 w-0 h-0.5 bg-emerald-500 group-hover:w-full transition-all duration-300"
-                    whileHover={{ width: '100%' }}
+                    whileHover={{ width: "100%" }}
                   />
                 </motion.div>
               ))}

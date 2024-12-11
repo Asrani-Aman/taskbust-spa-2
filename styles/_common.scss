@@ -1,15 +1,39 @@
 @import "function";
 
 .title-logo {
-  font-size: $xl-6;
-  -webkit-text-stroke: 1px $white;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700; /* Making it extra bold */
+  letter-spacing: -1px;
+  -webkit-text-stroke: 0.5px white;
   color: transparent;
-  span {
-    font-size: $xl-5;
-    -webkit-text-stroke: $green;
-    color: $green;
-  }
+  position: relative;
+  display: inline-block;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1),
+    0 0 20px rgba(255, 255, 255, 0.2);
 }
+
+.title-logo span {
+  font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive font size */
+  font-weight: 700;
+  -webkit-text-stroke: 0.5px #01f27e; /* Adjusted for smaller screens */
+  color: #01f27e;
+  position: relative;
+  margin-right: 0.25rem;
+}
+
+/* Add a subtle text shadow for more depth */
+.title-logo,
+.title-logo span {
+  text-shadow: 0 0 20px rgba(1, 242, 126, 0.1), 0 0 40px rgba(1, 242, 126, 0.1);
+}
+
+/* Hover effect for extra interactivity */
+.title-logo:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+}
+
 .logobg {
   font-size: $xll;
   span {

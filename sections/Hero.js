@@ -59,14 +59,15 @@ const Hero = () => {
 
       <Expertise />
       <Banner />
-      <Testimonial />
+      {/* <Testimonial /> */}
       {/* <ShowCase /> */}
       {/* <Brand /> */}
-
-      <div className="text-center">
-        <Title title="Latest news & articles" />
+      <div className="py-20">
+        <div className="text-center">
+          <Title title="Latest news & articles" />
+        </div>
+        <BlogCard />
       </div>
-      <BlogCard />
     </>
   );
 };
