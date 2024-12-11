@@ -1,43 +1,49 @@
 import Script from "next/script";
 import Layout from "@/components/common/Layout";
 import "@/styles/main.scss";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import { SessionProvider } from "next-auth/react";
+import { Analytics } from "@vercel/analytics/react";
+import { DefaultSeo } from "next-seo";
+import seoConfig from "@/components/seo.config";
 import TaskBustLoader from "@/components/TaskBustLoader";
-import { SessionProvider, use } from "next-auth/react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
-  const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [routeChanging, setRouteChanging] = useState(false);
+  const router = useRouter();
 
-  // Initial page load
+  // Track page views when route changes
+  const handleRouteChange = (url) => {
+    window.gtag("config", "G-3HGFT4X0KV", {
+      page_path: url,
+    });
+  };
+
   useEffect(() => {
-    // Simulate minimum loader display time
+    // Handle initial page load
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 2000);
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Route change loader
-  useEffect(() => {
+    // Handle route changes
     const handleStart = () => setRouteChanging(true);
     const handleComplete = () => setRouteChanging(false);
 
     router.events.on("routeChangeStart", handleStart);
     router.events.on("routeChangeComplete", handleComplete);
+    router.events.on("routeChangeComplete", handleRouteChange);
     router.events.on("routeChangeError", handleComplete);
 
     return () => {
+      clearTimeout(timer);
       router.events.off("routeChangeStart", handleStart);
       router.events.off("routeChangeComplete", handleComplete);
       router.events.off("routeChangeError", handleComplete);
     };
   }, [router]);
 
-  // Show loader for initial load or route changes
   if (loading || routeChanging) {
     return <TaskBustLoader />;
   }
@@ -46,19 +52,21 @@ export default function App({ Component, pageProps }) {
     <>
       <SessionProvider session={pageProps.session}>
         <Layout>
+          {/* Google Analytics */}
           <Script
-            strategy="lazyOnload"
+            strategy="afterInteractive"
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
           />
-          <Script strategy="lazyOnload" id="ga-script">
+          <Script id="google-analytics" strategy="afterInteractive">
             {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-        `}
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+            `}
           </Script>
           <Component {...pageProps} />
+          <Analytics />
         </Layout>
       </SessionProvider>
     </>

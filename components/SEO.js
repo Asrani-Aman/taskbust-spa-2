@@ -1,23 +1,50 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
+import seoConfig from "./seo.config";
 
 const SEO = ({
-  title = "TaskBust - Web Development,App Development, Web3, Design & Digital Solutions",
-  description = "Premium digital agency specializing in web development,app development, Web3, design, and creative solutions.",
-  keywords = "digital agency, web development,app development, Web3, design agency, video editing, graphic design",
+  title = seoConfig.default.title,
+  description = seoConfig.default.description,
+  keywords = "digital agency, web development, app development, Web3, design agency",
 }) => {
+  const router = useRouter();
+  const canonicalUrl = `https://taskbust.com${router.asPath}`;
+
+  // Get page-specific SEO config
+  const pageConfig = seoConfig.pages[router.pathname.replace("/", "")] || {};
+
   return (
     <Head>
-      <title>{title}</title>
-      <meta name="description" content={description} />
+      <title>{pageConfig.title || title}</title>
+      <meta
+        name="description"
+        content={pageConfig.description || description}
+      />
       <meta name="keywords" content={keywords} />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content="/og-image.jpg" />
+
+      {/* Open Graph */}
+      <meta property="og:title" content={pageConfig.title || title} />
+      <meta
+        property="og:description"
+        content={pageConfig.description || description}
+      />
+      <meta
+        property="og:image"
+        content={seoConfig.default.openGraph.images[0].url}
+      />
       <meta property="og:type" content="website" />
+      <meta property="og:url" content={canonicalUrl} />
+
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <link rel="canonical" href="https://taskbust.com" />
+      <meta name="twitter:title" content={pageConfig.title || title} />
+      <meta
+        name="twitter:description"
+        content={pageConfig.description || description}
+      />
+
+      {/* Canonical */}
+      <link rel="canonical" href={canonicalUrl} />
     </Head>
   );
 };
